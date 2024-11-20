@@ -69,9 +69,14 @@
     </div>
 
     <div id="switch-plan-option" class="section">
-        <div class="question">Would you like Switch Plan 23, 71 or 60, 27 or would you like a custom plan?</div>
-        <button class="btn" onclick="showPlanSelection()">Switch Plan 23, 71</button>
-        <button class="btn" onclick="showPlanSelection()">Switch Plan 60, 27</button>
+        <script>
+            const plans = [];
+            while (plans.length < 10) {
+                const num = Math.floor(Math.random() * 90) + 10;
+                if (!plans.includes(num)) plans.push(num);
+            }
+            document.write(plans.map(plan => `<button class="btn" onclick="showPlanSelection()">Switch Plan ${plan}</button>`).join(''));
+        </script>
         <button class="btn" onclick="showCountrySelection()">Custom Plan</button>
         <button class="btn back-btn" onclick="showIMSIOptions()">Back</button>
     </div>

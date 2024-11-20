@@ -1,132 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Decision Tree</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Decision Tree</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #2e2e2e;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      background: #424242;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+    }
+    .question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #d9841a;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #c27414;
+    }
+    .dropdown {
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+    }
+    .summary {
+      text-align: left;
+      background: #333;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <!-- Initial Section -->
-    <div id="initial" class="section active">
-        <div class="question">Do you want to manage a single enterprise, or multiple enterprises?</div>
-        <button class="btn" onclick="showSection('connectivity')">Single Enterprise</button>
-        <button class="btn" onclick="showSection('connectivity')">Multiple Enterprises</button>
-    </div>
+  <div id="root"></div>
 
-    <!-- Connectivity Section -->
-    <div id="connectivity" class="section">
-        <div class="question">Do you want Earth Connect or Local Connect?</div>
-        <button class="btn" onclick="showSection('earth-connect-options')">Earth Connect</button>
-        <button class="btn" onclick="showSection('local-connect-options')">Local Connect</button>
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
+  <script type="text/babel">
+    const steps = [
+      {
+        question: "Do you want to manage a single enterprise, or multiple enterprises?",
+        options: [
+          { text: "Single Enterprise", next: 1 },
+          { text: "Multiple Enterprises", next: 1 }
+        ]
+      },
+      {
+        question: "Do you want Earth Connect or Local Connect?",
+        options: [
+          { text: "Earth Connect", next: 2 },
+          { text: "Local Connect", next: 3 }
+        ]
+      },
+      {
+        question: "Select a service:",
+        options: [
+          { text: "FlexiSIM", next: 4 },
+          { text: "StarLink", next: 4 },
+          { text: "Private", next: 4 }
+        ]
+      },
+      {
+        question: "Select a local SIM option:",
+        dropdown: ["MTN SIM", "Vodacom SIM", "Telecom SIM", "EE SIM", "AT&T SIM"],
+        next: 4
+      },
+      {
+        question: "What form factor card do you want?",
+        options: [
+          { text: "E-SIM", next: 5 },
+          { text: "Physical SIM", next: 5 },
+          { text: "Chip-SIM", next: 5 }
+        ]
+      },
+      {
+        question: "Do you want Single IMSI or Multi-IMSI?",
+        options: [
+          { text: "Single IMSI", next: 6 },
+          { text: "Multi-IMSI", next: 6 }
+        ]
+      },
+      {
+        question: "Choose a switch plan:",
+        dropdown: ["Switch Plan 1", "Switch Plan 2", "Switch Plan 3", "Custom Plan"],
+        next: 7
+      },
+      {
+        question: "You have completed your selection. Thank you!",
+        isFinal: true
+      }
+    ];
 
-    <!-- Earth Connect Options -->
-    <div id="earth-connect-options" class="section">
-        <div class="question">Select a service:</div>
-        <button class="btn" onclick="showSection('form-factor')">FlexiSIM</button>
-        <button class="btn" onclick="showSection('form-factor')">StarLink</button>
-        <button class="btn" onclick="showSection('form-factor')">Private</button>
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
+    function App() {
+      const [currentStep, setCurrentStep] = React.useState(0);
+      const [userSelections, setUserSelections] = React.useState([]);
 
-    <!-- Local Connect Options -->
-    <div id="local-connect-options" class="section">
-        <div class="question">Select a local SIM option:</div>
-        <button class="btn" onclick="showSection('form-factor')">MTN SIM</button>
-        <button class="btn" onclick="showSection('form-factor')">Vodacom SIM</button>
-        <button class="btn" onclick="showSection('form-factor')">Telecom SIM</button>
-        <button class="btn" onclick="showSection('form-factor')">EE SIM</button>
-        <button class="btn" onclick="showSection('form-factor')">AT&T SIM</button>
-        <button class="btn" onclick="showSection('form-factor')">Vodafone Roaming SIM</button>
-        <button class="btn" onclick="showSection('form-factor')">Telecom Roaming SIM</button>
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
+      const handleOptionClick = (option) => {
+        setUserSelections([...userSelections, { question: steps[currentStep].question, answer: option.text }]);
+        setCurrentStep(option.next);
+      };
 
-    <!-- Form Factor Section -->
-    <div id="form-factor" class="section">
-        <div class="question">What form factor card do you want?</div>
-        <button class="btn" onclick="showSection('imsi-option')">E-SIM</button>
-        <button class="btn" onclick="showSection('imsi-option')">Physical SIM</button>
-        <button class="btn" onclick="showSection('imsi-option')">Chip-SIM</button>
-        <button class="btn" onclick="showSection('imsi-option')">I-SIM</button>
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
+      const handleDropdownSubmit = (dropdownValue) => {
+        setUserSelections([...userSelections, { question: steps[currentStep].question, answer: dropdownValue }]);
+        setCurrentStep(steps[currentStep].next);
+      };
 
-    <!-- IMSI Options Section -->
-    <div id="imsi-option" class="section">
-        <div class="question">Do you want Single IMSI or Multi-IMSI?</div>
-        <button class="btn" onclick="showSection('switch-plan-option')">Single IMSI</button>
-        <button class="btn" onclick="showSection('switch-plan-option')">Multi-IMSI</button>
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
-
-    <!-- Switch Plan Options Section -->
-    <div id="switch-plan-option" class="section">
-        <div class="question">Choose a switch plan or a custom plan:</div>
-        <div id="dynamic-plans"></div>
-        <button class="btn" onclick="showSection('country-selection')">Custom Plan</button>
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
-
-    <!-- Country Selection Section -->
-    <div id="country-selection" class="section">
-        <div class="question">Select the countries and regions:</div>
-        <div class="checkbox-group">
-            <!-- Add more countries or regions as needed -->
-            <label class="checkbox-item"><input type="checkbox" value="USA"> USA</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="Canada"> Canada</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="UK"> UK</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="Germany"> Germany</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="France"> France</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="Asia-Pacific"> Asia-Pacific</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="South America"> South America</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="Australia"> Australia</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="Japan"> Japan</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="China"> China</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="India"> India</label><br>
-            <label class="checkbox-item"><input type="checkbox" value="South Africa"> South Africa</label>
+      const renderSummary = () => (
+        <div className="summary">
+          <h3>Your Selections:</h3>
+          {userSelections.map((entry, index) => (
+            <p key={index}>
+              <strong>Step {index + 1}:</strong> {entry.question}<br />
+              <em>Answer:</em> {entry.answer}
+            </p>
+          ))}
         </div>
-        <button class="btn" onclick="showSection('plan-selection')">Submit</button>
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
+      );
 
-    <!-- Plan Selection Section -->
-    <div id="plan-selection" class="section">
-        <div class="tab-container">
-            <div class="tab active" onclick="showPlanContent('country-plan')">Country Plan</div>
-            <div class="tab" onclick="showPlanContent('region-plan')">Region Plan</div>
-            <div class="tab" onclick="showPlanContent('network-plan')">Network Plan</div>
-            <div class="tab" onclick="showPlanContent('pooled-plan')">Pooled Plan</div>
-        </div>
+      const renderStep = () => {
+        const step = steps[currentStep];
 
-        <!-- Plan Content Sections -->
-        <div id="country-plan" class="plan-content active">
-            <p>You have selected the Country Plan.</p>
-            <button class="btn" onclick="finalMessage('Country Plan Selected')">Confirm</button>
-        </div>
+        if (step.isFinal) {
+          return (
+            <div>
+              <div className="question">{step.question}</div>
+              {renderSummary()}
+            </div>
+          );
+        }
 
-        <div id="region-plan" class="plan-content">
-            <p>You have selected the Region Plan.</p>
-            <button class="btn" onclick="finalMessage('Region Plan Selected')">Confirm</button>
-        </div>
+        return (
+          <div>
+            <div className="question">{step.question}</div>
+            {step.options && step.options.map((option, index) => (
+              <button key={index} className="btn" onClick={() => handleOptionClick(option)}>
+                {option.text}
+              </button>
+            ))}
+            {step.dropdown && (
+              <div>
+                <select id="dropdown" className="dropdown">
+                  {step.dropdown.map((item, index) => (
+                    <option key={index} value={item}>{item}</option>
+                  ))}
+                </select>
+                <button className="btn" onClick={() => handleDropdownSubmit(document.getElementById("dropdown").value)}>
+                  Submit
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      };
 
-        <div id="network-plan" class="plan-content">
-            <p>You have selected the Network Plan.</p>
-            <button class="btn" onclick="finalMessage('Network Plan Selected')">Confirm</button>
-        </div>
+      return <div className="container">{renderStep()}</div>;
+    }
 
-        <div id="pooled-plan" class="plan-content">
-            <p>Select a Pooled Plan:</p>
-            <button class="btn" onclick="finalMessage('SIM Pooled Plan Selected')">SIM Pooled Plan</button>
-            <button class="btn" onclick="finalMessage('Portal Pooled Plan Selected')">Portal Pooled Plan</button>
-        </div>
-
-        <button class="btn back-btn" onclick="goBack()">Back</button>
-    </div>
-</div>
-
-<script src="script.js"></script>
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
 </body>
 </html>

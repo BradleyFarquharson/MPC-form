@@ -25,23 +25,23 @@
     <!-- Earth Connect Options -->
     <div id="earth-connect-options" class="section">
         <div class="question">Select a service:</div>
-        <button class="btn" onclick="showFormFactor()">FlexiSIM</button>
-        <button class="btn" onclick="showFormFactor()">StarLink</button>
-        <button class="btn" onclick="showFormFactor()">Private</button>
-        <button class="btn back-btn" onclick="showSection('connectivity')">Back</button>
+        <button class="btn" onclick="showSection('form-factor')">FlexiSIM</button>
+        <button class="btn" onclick="showSection('form-factor')">StarLink</button>
+        <button class="btn" onclick="showSection('form-factor')">Private</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
     </div>
 
     <!-- Local Connect Options -->
     <div id="local-connect-options" class="section">
         <div class="question">Select a local SIM option:</div>
-        <button class="btn" onclick="showFormFactor()">MTN SIM</button>
-        <button class="btn" onclick="showFormFactor()">Vodacom SIM</button>
-        <button class="btn" onclick="showFormFactor()">Telecom SIM</button>
-        <button class="btn" onclick="showFormFactor()">EE SIM</button>
-        <button class="btn" onclick="showFormFactor()">AT&T SIM</button>
-        <button class="btn" onclick="showFormFactor()">Vodafone Roaming SIM</button>
-        <button class="btn" onclick="showFormFactor()">Telecom Roaming SIM</button>
-        <button class="btn back-btn" onclick="showSection('connectivity')">Back</button>
+        <button class="btn" onclick="showSection('form-factor')">MTN SIM</button>
+        <button class="btn" onclick="showSection('form-factor')">Vodacom SIM</button>
+        <button class="btn" onclick="showSection('form-factor')">Telecom SIM</button>
+        <button class="btn" onclick="showSection('form-factor')">EE SIM</button>
+        <button class="btn" onclick="showSection('form-factor')">AT&T SIM</button>
+        <button class="btn" onclick="showSection('form-factor')">Vodafone Roaming SIM</button>
+        <button class="btn" onclick="showSection('form-factor')">Telecom Roaming SIM</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
     </div>
 
     <!-- Form Factor Section -->
@@ -59,7 +59,7 @@
         <div class="question">Do you want Single IMSI or Multi-IMSI?</div>
         <button class="btn" onclick="showSection('switch-plan-option')">Single IMSI</button>
         <button class="btn" onclick="showSection('switch-plan-option')">Multi-IMSI</button>
-        <button class="btn back-btn" onclick="showSection('form-factor')">Back</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
     </div>
 
     <!-- Switch Plan Options Section -->
@@ -67,7 +67,7 @@
         <div class="question">Choose a switch plan or a custom plan:</div>
         <div id="dynamic-plans"></div>
         <button class="btn" onclick="showSection('country-selection')">Custom Plan</button>
-        <button class="btn back-btn" onclick="showSection('imsi-option')">Back</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
     </div>
 
     <!-- Country Selection Section -->
@@ -89,7 +89,7 @@
             <label class="checkbox-item"><input type="checkbox" value="South Africa"> South Africa</label>
         </div>
         <button class="btn" onclick="showSection('plan-selection')">Submit</button>
-        <button class="btn back-btn" onclick="showSection('switch-plan-option')">Back</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
     </div>
 
     <!-- Plan Selection Section -->
@@ -123,7 +123,7 @@
             <button class="btn" onclick="finalMessage('Portal Pooled Plan Selected')">Portal Pooled Plan</button>
         </div>
 
-        <button class="btn back-btn" onclick="showSection('country-selection')">Back</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
     </div>
 </div>
 

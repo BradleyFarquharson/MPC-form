@@ -27,13 +27,113 @@
                 </div>
             </div>
 
-            <!-- Additional cards will be added dynamically -->
+            <!-- Enterprise Details Card -->
+            <div class="card hidden" id="enterpriseDetailsCard" data-step="1.5">
+                <h2>Enterprise Details</h2>
+                <div class="input-group" id="enterpriseInputs"></div>
+            </div>
+
+            <!-- Network Selection Card -->
+            <div class="card hidden" id="networkCard" data-step="2">
+                <h2>Network Configuration</h2>
+                <div class="button-group">
+                    <button class="btn" onclick="selectNetwork('earth')">Earth Connect</button>
+                    <button class="btn" onclick="selectNetwork('local')">Local Connect</button>
+                </div>
+            </div>
+
+            <!-- Realm Configuration Card -->
+            <div class="card hidden" id="realmCard" data-step="2.5">
+                <h2>Realm Configuration</h2>
+                <div class="button-group">
+                    <button class="btn" onclick="selectRealm('shared')">Shared Realm</button>
+                    <button class="btn" onclick="selectRealm('custom')">Custom Realm</button>
+                </div>
+                <div class="input-group hidden" id="realmNameInput">
+                    <input type="text" placeholder="Enter Realm Name" id="realmName" class="input-field">
+                </div>
+            </div>
+
+            <!-- Earth Connect Options Card -->
+            <div class="card hidden" id="earthConnectCard" data-step="3">
+                <h2>Earth Connect Configuration</h2>
+                <div class="selection-group">
+                    <h3>Form Factor</h3>
+                    <div class="button-group">
+                        <button class="btn" onclick="selectFormFactor('esim')">E-SIM</button>
+                        <button class="btn" onclick="selectFormFactor('physical')">Physical SIM</button>
+                        <button class="btn" onclick="selectFormFactor('chip')">Chip-SIM</button>
+                        <button class="btn" onclick="selectFormFactor('isim')">I-SIM</button>
+                    </div>
+                </div>
+                <div class="selection-group hidden" id="imsiSelection">
+                    <h3>IMSI Type</h3>
+                    <div class="button-group">
+                        <button class="btn" onclick="selectIMSI('single')">Single IMSI</button>
+                        <button class="btn" onclick="selectIMSI('multi')">Multi-IMSI</button>
+                    </div>
+                </div>
+                <div class="selection-group hidden" id="profilePlanSelection">
+                    <h3>Profile Plan</h3>
+                    <select id="profilePlan" class="select-field" onchange="selectProfilePlan(this.value)">
+                        <!-- Options populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="selection-group hidden" id="countrySelection">
+                    <h3>Country Selection</h3>
+                    <select id="countries" class="select-field" multiple onchange="selectCountries()">
+                        <!-- Options populated by JavaScript -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Local Connect Options Card -->
+            <div class="card hidden" id="localConnectCard" data-step="3">
+                <h2>Local Connect Configuration</h2>
+                <div class="selection-group">
+                    <h3>Form Factor</h3>
+                    <div class="button-group">
+                        <button class="btn" onclick="selectLocalFormFactor('physical')">Physical SIM</button>
+                        <button class="btn" onclick="selectLocalFormFactor('chip')">Chip-SIM</button>
+                    </div>
+                </div>
+                <div class="selection-group hidden" id="networkSelection">
+                    <h3>Network Selection</h3>
+                    <div class="button-group">
+                        <button class="btn" onclick="selectNetwork('mtn')">MTN Connect</button>
+                        <button class="btn" onclick="selectNetwork('vodacom')">Vodacom Connect</button>
+                        <button class="btn" onclick="selectNetwork('telkom')">Telkom Connect</button>
+                        <button class="btn" onclick="selectNetwork('ee')">EE Connect</button>
+                        <button class="btn" onclick="selectNetwork('att')">ATT Connect</button>
+                        <button class="btn" onclick="selectNetwork('vodafone')">Vodafone Connect</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Plan Card -->
+            <div class="card hidden" id="billingCard" data-step="4">
+                <h2>Billing Plan</h2>
+                <div class="button-group">
+                    <button class="btn" onclick="selectBillingPlan('multitenant')">Multitenant Pooled Plan</button>
+                    <button class="btn" onclick="selectBillingPlan('portal')">Portal Pooled Plan</button>
+                    <button class="btn" onclick="selectBillingPlan('user')">User Pooled Data Plan</button>
+                    <button class="btn" onclick="selectBillingPlan('sim')">Sim Pooled Data Plan</button>
+                </div>
+            </div>
+
+            <!-- Summary Card -->
+            <div class="card hidden" id="summaryCard" data-step="5">
+                <h2>Configuration Summary</h2>
+                <div id="summaryContent" class="summary-content">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
         </div>
 
         <!-- Navigation -->
         <div class="navigation">
-            <button class="btn btn-back" id="backBtn" onclick="previousStep()" style="display: none;">Back</button>
-            <button class="btn btn-next" id="nextBtn" onclick="nextStep()" style="display: none;">Next</button>
+            <button class="btn btn-back" id="backBtn" onclick="previousStep()">Back</button>
+            <button class="btn btn-next" id="nextBtn" onclick="nextStep()">Next</button>
         </div>
     </div>
     <script src="app.js"></script>

@@ -7,22 +7,8 @@
 <div class="container">
     <div id="initial" class="section active">
         <div class="question">Do you want to manage a single enterprise, or multiple enterprises?</div>
-        <button class="btn" onclick="showSection('single')">Single Enterprise</button>
-        <button class="btn" onclick="showSection('multiple')">Multiple Enterprises</button>
-    </div>
-
-    <div id="multiple" class="section">
-        <div class="question">How many child-portals/enterprises do you need to manage?</div>
-        <input type="number" id="enterpriseCount" min="2" value="2" style="padding: 10px; margin: 10px 0;">
-        <br>
-        <button class="btn" onclick="showSection('connectivity')">Continue</button>
-        <button class="btn back-btn" onclick="showSection('initial')">Back</button>
-    </div>
-
-    <div id="single" class="section">
-        <div class="question">Single enterprise selected</div>
-        <button class="btn" onclick="showSection('connectivity')">Continue</button>
-        <button class="btn back-btn" onclick="showSection('initial')">Back</button>
+        <button class="btn" onclick="showSection('connectivity')">Single Enterprise</button>
+        <button class="btn" onclick="showSection('connectivity')">Multiple Enterprises</button>
     </div>
 
     <div id="connectivity" class="section">

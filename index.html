@@ -55,6 +55,7 @@
     </div>
 
     <div id="switch-plan-option" class="section">
+        <div class="question">Choose a switch plan or a custom plan:</div>
         <script>
             const plans = [];
             while (plans.length < 10) {
@@ -93,21 +94,21 @@
         <div class="tab" onclick="showSpecificPlan('network')">Network Plan</div>
         <div class="tab" onclick="showSpecificPlan('pooled')">Pooled Plan</div>
 
-        <div id="country-plan" class="section" style="display:none;">
+        <div id="country-plan" class="section">
             <button class="btn" onclick="finalMessage('Country Plan Selected')">Select Country Plan</button>
         </div>
 
-        <div id="region-plan" class="section" style="display:none;">
+        <div id="region-plan" class="section">
             <button class="btn" onclick="finalMessage('Region Plan Selected')">Select Region Plan</button>
         </div>
 
-        <div id="network-plan" class="section" style="display:none;">
+        <div id="network-plan" class="section">
             <button class="btn" onclick="finalMessage('Network Plan Selected')">Select Network Plan</button>
         </div>
 
-        <div id="pooled-plan" class="section" style="display:none;">
-            <button class="btn" onclick="showPooledOptions()">SIM Pooled Plan</button>
-            <button class="btn" onclick="showPooledOptions()">Portal Pooled Plan</button>
+        <div id="pooled-plan" class="section">
+            <button class="btn" onclick="finalMessage('SIM Pooled Plan Selected')">SIM Pooled Plan</button>
+            <button class="btn" onclick="finalMessage('Portal Pooled Plan Selected')">Portal Pooled Plan</button>
         </div>
 
         <button class="btn back-btn" onclick="showCountrySelection()">Back</button>

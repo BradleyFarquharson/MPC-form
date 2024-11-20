@@ -7,20 +7,19 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .container {
     background: #3D3D3D;
     border-radius: 12px;
     padding: 30px;
-    width: 90%;
     max-width: 600px;
+    width: 90%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: auto;
 }
 
 .step {
@@ -29,11 +28,18 @@ body {
 
 .step.active {
     display: block;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 22px;
+    margin: 20px 0 10px;
     font-weight: normal;
 }
 
@@ -52,8 +58,31 @@ button {
     transition: all 0.3s ease;
 }
 
+button:hover {
+    background: #E15C28;
+}
+
 button.selected {
     background: #FFD1B3;
+}
+
+.hidden {
+    display: none;
+}
+
+input, select {
+    background: #FFF;
+    color: #000;
+    border: 1px solid #CCC;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+select[multiple] {
+    height: 120px;
 }
 
 .navigation {
@@ -72,4 +101,15 @@ button.selected {
 .navigation button:hover {
     background: #FF6B2B;
     color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

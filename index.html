@@ -11,49 +11,50 @@
         <!-- Enterprise Configuration -->
         <div class="step active" id="enterpriseStep">
             <h2>Enterprise Type</h2>
-            <button onclick="selectEnterprise('single')">Single Enterprise</button>
-            <button onclick="selectEnterprise('multi')">Multi-Tenant Enterprise</button>
+            <button data-action="selectEnterprise" data-type="single">Single Enterprise</button>
+            <button data-action="selectEnterprise" data-type="multi">Multi-Tenant Enterprise</button>
             <div id="enterpriseInputs" class="hidden">
                 <input type="text" placeholder="Enterprise Name" id="enterpriseName">
-                <input type="number" placeholder="Number of Child Portals" id="childPortals" min="2" class="hidden">
+                <div id="childPortals" class="hidden">
+                    <input type="number" placeholder="Number of Child Portals" id="childPortalCount" min="2">
+                </div>
             </div>
         </div>
 
         <!-- Network Configuration -->
         <div class="step" id="networkStep">
             <h2>Network Configuration</h2>
-            <button onclick="selectNetwork('earth')">Earth Connect</button>
-            <button onclick="selectNetwork('local')">Local Connect</button>
+            <button data-action="selectNetwork" data-type="earth">Earth Connect</button>
+            <button data-action="selectNetwork" data-type="local">Local Connect</button>
             <div id="realmInputs" class="hidden">
-                <button onclick="selectRealm('shared')">Shared Realm</button>
-                <button onclick="selectRealm('custom')">Custom Realm</button>
+                <button data-action="selectRealm" data-type="shared">Shared Realm</button>
+                <button data-action="selectRealm" data-type="custom">Custom Realm</button>
                 <input type="text" placeholder="Realm Name" id="realmName" class="hidden">
             </div>
         </div>
 
-        <!-- Connectivity Options for Earth Connect -->
+        <!-- Connectivity Options -->
         <div class="step" id="connectivityOptionsStep">
             <h2>Connectivity Options</h2>
-            <button onclick="chooseOption('gsm')">FlexiSIM - GSM Connect</button>
+            <button data-action="chooseOption" data-option="gsm">FlexiSIM - GSM Connect</button>
             <div id="formFactorInputs" class="hidden">
                 <h3>Form Factor</h3>
-                <button onclick="selectFormFactor('esim')">E-SIM</button>
-                <button onclick="selectFormFactor('physical')">Physical SIM</button>
-                <button onclick="selectFormFactor('chip')">Chip-SIM</button>
-                <button onclick="selectFormFactor('isim')">I-SIM</button>
+                <button data-action="selectFormFactor" data-factor="esim">E-SIM</button>
+                <button data-action="selectFormFactor" data-factor="physical">Physical SIM</button>
+                <button data-action="selectFormFactor" data-factor="chip">Chip-SIM</button>
+                <button data-action="selectFormFactor" data-factor="isim">I-SIM</button>
             </div>
             <div id="imsiOptions" class="hidden">
                 <h3>IMSI Options</h3>
-                <button onclick="selectIMSI('single')">Single IMSI</button>
-                <button onclick="selectIMSI('multi')">Multi-IMSI</button>
+                <button data-action="selectIMSI" data-imsi="single">Single IMSI</button>
+                <button data-action="selectIMSI" data-imsi="multi">Multi-IMSI</button>
             </div>
             <div id="profilePlans" class="hidden">
                 <h3>Connectivity Profile Plans</h3>
-                <button onclick="selectPlan('plan24')">Switch Plan 24</button>
-                <button onclick="selectPlan('plan25')">Switch Plan 25</button>
-                <button onclick="selectPlan('plan71')">Single IMSI Plan 71</button>
-                <button onclick="selectPlan('plan21')">Single IMSI Plan 21</button>
-                <button onclick="selectCountryPlan()">Custom Plan</button>
+                <button data-action="selectPlan" data-plan="plan24">Switch Plan 24</button>
+                <button data-action="selectPlan" data-plan="plan25">Switch Plan 25</button>
+                <button data-action="selectPlan" data-plan="plan71">Single IMSI Plan 71</button>
+                <button data-action="selectPlan" data-plan="plan21">Single IMSI Plan 21</button>
             </div>
         </div>
 
@@ -80,17 +81,14 @@
         <div class="step" id="rateCardStep">
             <h2>Rate Card and Billing Plan</h2>
             <h3>Rate Card Plan Selection</h3>
-            <button onclick="selectRateCard('earth')">Earth Rate Card</button>
-            <button onclick="selectRateCard('region')">Region Rate Card</button>
-            <button onclick="selectRateCard('country')">Country Rate Card</button>
-            <button onclick="selectRateCard('network')">Network Rate Card</button>
-
+            <button data-action="selectRateCard" data-ratecard="earth">Earth Rate Card</button>
+            <button data-action="selectRateCard" data-ratecard="region">Region Rate Card</button>
+            <button data-action="selectRateCard" data-ratecard="country">Country Rate Card</button>
             <div id="billingOptions" class="hidden">
                 <h3>Billing Plan</h3>
-                <button onclick="selectBilling('multitenant')">Multitenant Pooled Plan</button>
-                <button onclick="selectBilling('portal')">Portal Pooled Plan</button>
-                <button onclick="selectBilling('user')">User Pooled Data Plan</button>
-                <button onclick="selectBilling('sim')">Sim Pooled Data Plan</button>
+                <button data-action="selectBilling" data-billing="multitenant">Multitenant Pooled Plan</button>
+                <button data-action="selectBilling" data-billing="portal">Portal Pooled Plan</button>
+                <button data-action="selectBilling" data-billing="user">User Pooled Data Plan</button>
             </div>
         </div>
 
@@ -102,11 +100,10 @@
 
         <!-- Navigation -->
         <div class="navigation">
-            <button onclick="navigate('back')" id="backBtn">Back</button>
-            <button onclick="navigate('next')" id="nextBtn">Next</button>
+            <button id="backBtn">Back</button>
+            <button id="nextBtn">Next</button>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>

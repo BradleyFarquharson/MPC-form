@@ -6,24 +6,28 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    color: #ffffff;
 }
+
 .container {
     width: 95%;
     max-width: 700px;
     background-color: #424242;
-    color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
+
 .section {
     margin: 20px 0;
     display: none;
 }
+
 .section.active {
     display: block;
 }
+
 .btn {
     background-color: #d9841a;
     color: white;
@@ -34,38 +38,63 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-    display: inline-block;
 }
+
 .btn:hover {
     background-color: #c27414;
 }
+
 .back-btn {
     background-color: #777;
 }
+
 .question {
     font-size: 20px;
     margin-bottom: 20px;
 }
+
 .checkbox-group {
     margin-top: 10px;
-    max-height: 100px;
+    max-height: 200px;
     overflow-y: auto;
     background-color: #555;
     padding: 10px;
     border-radius: 5px;
 }
+
 .checkbox-item {
     margin: 5px 0;
 }
+
+.tab-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
 .tab {
     background-color: #666;
     color: white;
     padding: 10px 15px;
-    display: inline-block;
-    margin-right: 5px;
     cursor: pointer;
     border-radius: 5px 5px 0 0;
+    margin-right: 5px;
 }
+
 .tab.active {
     background-color: #d9841a;
+}
+
+.plan-content {
+    background-color: #555;
+    padding: 20px;
+    border-radius: 0 5px 5px 5px;
+    display: none;
+}
+
+.plan-content.active {
+    display: block;
+}
+
+.plan-content p {
+    margin-bottom: 20px;
 }

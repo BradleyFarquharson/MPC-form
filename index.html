@@ -13,11 +13,9 @@
             <h2>Enterprise Type</h2>
             <button data-action="selectEnterprise" data-type="single">Single Enterprise</button>
             <button data-action="selectEnterprise" data-type="multi">Multi-Tenant Enterprise</button>
-            <div id="enterpriseInputs" class="hidden">
-                <input type="text" placeholder="Enterprise Name" id="enterpriseName">
-                <div id="childPortals" class="hidden">
-                    <input type="number" placeholder="Number of Child Portals" id="childPortalCount" min="2">
-                </div>
+            <input type="text" id="enterpriseName" placeholder="Enterprise Name">
+            <div id="childPortals" class="hidden">
+                <input type="number" id="childPortalCount" placeholder="Child Portals (Min 2)" min="2">
             </div>
         </div>
 
@@ -29,7 +27,7 @@
             <div id="realmInputs" class="hidden">
                 <button data-action="selectRealm" data-type="shared">Shared Realm</button>
                 <button data-action="selectRealm" data-type="custom">Custom Realm</button>
-                <input type="text" placeholder="Realm Name" id="realmName" class="hidden">
+                <input type="text" id="realmName" placeholder="Realm Name" class="hidden">
             </div>
         </div>
 
@@ -41,20 +39,15 @@
                 <h3>Form Factor</h3>
                 <button data-action="selectFormFactor" data-factor="esim">E-SIM</button>
                 <button data-action="selectFormFactor" data-factor="physical">Physical SIM</button>
-                <button data-action="selectFormFactor" data-factor="chip">Chip-SIM</button>
-                <button data-action="selectFormFactor" data-factor="isim">I-SIM</button>
             </div>
             <div id="imsiOptions" class="hidden">
                 <h3>IMSI Options</h3>
                 <button data-action="selectIMSI" data-imsi="single">Single IMSI</button>
-                <button data-action="selectIMSI" data-imsi="multi">Multi-IMSI</button>
+                <button data-action="selectIMSI" data-imsi="multi">Multi IMSI</button>
             </div>
             <div id="profilePlans" class="hidden">
-                <h3>Connectivity Profile Plans</h3>
-                <button data-action="selectPlan" data-plan="plan24">Switch Plan 24</button>
-                <button data-action="selectPlan" data-plan="plan25">Switch Plan 25</button>
-                <button data-action="selectPlan" data-plan="plan71">Single IMSI Plan 71</button>
-                <button data-action="selectPlan" data-plan="plan21">Single IMSI Plan 21</button>
+                <h3>Connectivity Plans</h3>
+                <button data-action="selectPlan" data-plan="basic">Basic Plan</button>
                 <button data-action="selectPlan" data-plan="custom">Custom Plan</button>
             </div>
         </div>
@@ -66,32 +59,17 @@
                 <option value="usa">USA</option>
                 <option value="canada">Canada</option>
                 <option value="uk">UK</option>
-                <option value="germany">Germany</option>
-                <option value="france">France</option>
-                <option value="asia-pacific">Asia-Pacific</option>
-                <option value="south-america">South America</option>
-                <option value="australia">Australia</option>
-                <option value="japan">Japan</option>
-                <option value="china">China</option>
-                <option value="india">India</option>
-                <option value="south-africa">South Africa</option>
             </select>
         </div>
 
-        <!-- Rate Card and Billing Plan Selection -->
-        <div class="step" id="rateCardStep">
-            <h2>Rate Card and Billing Plan</h2>
-            <h3>Rate Card Plan Selection</h3>
-            <button data-action="selectRateCard" data-ratecard="earth">Earth Rate Card</button>
-            <button data-action="selectRateCard" data-ratecard="region">Region Rate Card</button>
-            <button data-action="selectRateCard" data-ratecard="country">Country Rate Card</button>
-            <button data-action="selectRateCard" data-ratecard="network">Network Rate Card</button>
+        <!-- Billing -->
+        <div class="step" id="billingStep">
+            <h2>Billing Options</h2>
+            <button data-action="selectRateCard" data-ratecard="standard">Standard Rate Card</button>
+            <button data-action="selectRateCard" data-ratecard="premium">Premium Rate Card</button>
             <div id="billingOptions" class="hidden">
-                <h3>Billing Plan</h3>
-                <button data-action="selectBilling" data-billing="multitenant">Multitenant Pooled Plan</button>
-                <button data-action="selectBilling" data-billing="portal">Portal Pooled Plan</button>
-                <button data-action="selectBilling" data-billing="user">User Pooled Data Plan</button>
-                <button data-action="selectBilling" data-billing="sim">Sim Pooled Data Plan</button>
+                <button data-action="selectBilling" data-billing="monthly">Monthly Billing</button>
+                <button data-action="selectBilling" data-billing="annual">Annual Billing</button>
             </div>
         </div>
 
@@ -103,8 +81,7 @@
 
         <!-- Navigation -->
         <div class="navigation">
-            <button id="backBtn">Back</button>
-            <button id="nextBtn">Next</button>
+            <button id="backBtn" style="display: none;">Back</button>
         </div>
     </div>
     <script src="app.js"></script>

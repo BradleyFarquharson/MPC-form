@@ -11,76 +11,102 @@ document.addEventListener('DOMContentLoaded', () => {
     steps[currentStep].classList.add('active');
     updateNavigation();
 
-    // Button click handlers need to have these methods available
-    window.selectEnterprise = function(type) {
-        selections.enterprise.type = type;
-        document.getElementById('enterpriseInputs').classList.remove('hidden');
-        if (type === 'multi') {
-            document.getElementById('childPortals').classList.remove('hidden');
-        } else {
-            document.getElementById('childPortals').classList.add('hidden');
-        }
-    };
+    // Enterprise Configuration
+    document.querySelectorAll('[data-action="selectEnterprise"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.dataset.type;
+            selections.enterprise.type = type;
+            document.getElementById('enterpriseInputs').classList.remove('hidden');
+            if (type === 'multi') {
+                document.getElementById('childPortals').classList.remove('hidden');
+            } else {
+                document.getElementById('childPortals').classList.add('hidden');
+            }
+        });
+    });
 
-    window.selectNetwork = function(type) {
-        selections.network.type = type;
-        document.getElementById('realmInputs').classList.remove('hidden');
-    };
+    // Network Configuration
+    document.querySelectorAll('[data-action="selectNetwork"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.dataset.type;
+            selections.network.type = type;
+            document.getElementById('realmInputs').classList.remove('hidden');
+        });
+    });
 
-    window.selectRealm = function(type) {
-        selections.network.realm = type;
-        if (type === 'custom') {
-            document.getElementById('realmName').classList.remove('hidden');
-        } else {
-            document.getElementById('realmName').classList.add('hidden');
-        }
-    };
+    document.querySelectorAll('[data-action="selectRealm"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.dataset.type;
+            selections.network.realm = type;
+            if (type === 'custom') {
+                document.getElementById('realmName').classList.remove('hidden');
+            } else {
+                document.getElementById('realmName').classList.add('hidden');
+            }
+        });
+    });
 
-    window.chooseOption = function(option) {
-        selections.connectivity.type = option;
-        document.getElementById('formFactorInputs').classList.remove('hidden');
-    };
+    // Connectivity Options
+    document.querySelectorAll('[data-action="chooseOption"]').forEach(button => {
+        button.addEventListener('click', () => {
+            selections.connectivity.type = button.dataset.option;
+            document.getElementById('formFactorInputs').classList.remove('hidden');
+        });
+    });
 
-    window.selectFormFactor = function(factor) {
-        selections.connectivity.formFactor = factor;
-        if (factor !== 'esim') {
-            document.getElementById('imsiOptions').classList.remove('hidden');
-        } else {
+    document.querySelectorAll('[data-action="selectFormFactor"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const factor = button.dataset.factor;
+            selections.connectivity.formFactor = factor;
+            if (factor !== 'esim') {
+                document.getElementById('imsiOptions').classList.remove('hidden');
+            } else {
+                navigate('next'); // E-SIM goes directly to the next step
+            }
+        });
+    });
+
+    document.querySelectorAll('[data-action="selectIMSI"]').forEach(button => {
+        button.addEventListener('click', () => {
+            selections.connectivity.imsiType = button.dataset.imsi;
+            document.getElementById('profilePlans').classList.remove('hidden');
+        });
+    });
+
+    document.querySelectorAll('[data-action="selectPlan"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const plan = button.dataset.plan;
+            selections.connectivity.plan = plan;
+            if (plan === 'plan24' || plan === 'plan25') {
+                navigate('next');
+            } else {
+                document.getElementById('countryStep').classList.remove('hidden');
+            }
+        });
+    });
+
+    document.getElementById('countrySelect').addEventListener('change', () => {
+        selections.connectivity.countries = Array.from(document.getElementById('countrySelect').selectedOptions).map(option => option.value);
+    });
+
+    document.querySelectorAll('[data-action="selectRateCard"]').forEach(button => {
+        button.addEventListener('click', () => {
+            selections.billing.rateCard = button.dataset.ratecard;
+            document.getElementById('billingOptions').classList.remove('hidden');
+        });
+    });
+
+    document.querySelectorAll('[data-action="selectBilling"]').forEach(button => {
+        button.addEventListener('click', () => {
+            selections.billing.plan = button.dataset.billing;
             navigate('next');
-        }
-    };
+        });
+    });
 
-    window.selectIMSI = function(type) {
-        selections.connectivity.imsiType = type;
-        document.getElementById('profilePlans').classList.remove('hidden');
-    };
+    document.getElementById('backBtn').addEventListener('click', () => navigate('back'));
+    document.getElementById('nextBtn').addEventListener('click', () => navigate('next'));
 
-    window.selectPlan = function(plan) {
-        selections.connectivity.plan = plan;
-        if (plan === 'plan24' || plan === 'plan25') {
-            navigate('next');
-        } else {
-            document.getElementById('countryStep').classList.remove('hidden');
-        }
-    };
-
-    window.selectCountryPlan = function() {
-        const countrySelect = document.getElementById('countrySelect');
-        selections.connectivity.countries = Array.from(countrySelect.selectedOptions).map(option => option.value);
-        navigate('next');
-    };
-
-    window.selectRateCard = function(rateCard) {
-        selections.billing.rateCard = rateCard;
-        document.getElementById('billingOptions').classList.remove('hidden');
-    };
-
-    window.selectBilling = function(plan) {
-        selections.billing.plan = plan;
-        navigate('next');
-    };
-
-    window.navigate = function(direction) {
+    function navigate(direction) {
         steps[currentStep].classList.remove('active');
         
         if (direction === 'next' && currentStep < steps.length - 1) {
@@ -91,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         steps[currentStep].classList.add('active');
         updateNavigation();
-    };
+    }
 
     function updateNavigation() {
         document.getElementById('backBtn').style.display = currentStep > 0 ? 'block' : 'none';

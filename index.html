@@ -9,42 +9,95 @@
             background: #2D2D2D;
             color: white;
             font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
+
         .container {
+            background: #3D3D3D;
+            border-radius: 12px;
+            padding: 40px;
+            width: 90%;
             max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
+            height: 80vh;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
+
         .step {
             display: none;
         }
+
         .step.active {
             display: block;
         }
+
         .step-counter {
             margin-bottom: 20px;
+            font-size: 18px;
         }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+
         button {
             background: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
+            color: black;
+            border: 1px solid #CCC;
+            padding: 12px 24px;
+            margin: 10px 0;
             border-radius: 4px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
-        button.selected {
-            border: 2px solid #0066FF;
+
+        button:focus {
+            outline: none;
+            border: 1px solid #FFF;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
         }
+
+        .selected {
+            background: #EEE;
+        }
+
         .navigation {
-            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
         }
+
         .navigation button {
+            background: white;
+            color: black;
+            width: calc(50% - 10px);
+            margin: 5px;
+        }
+
+        .navigation button:hover {
             background: #FF6B2B;
             color: white;
         }
-        h2 {
-            margin-bottom: 20px;
+
+        #backBtn {
+            order: 1;
+        }
+
+        #nextBtn {
+            order: 2;
         }
     </style>
 </head>
@@ -99,11 +152,8 @@
         const selections = {};
 
         function select(btn, type, value) {
-            // Remove selected class from siblings
             btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-            // Add selected class to clicked button
             btn.classList.add('selected');
-            // Store selection
             selections[type] = value;
         }
 
@@ -120,11 +170,9 @@
             const next = document.querySelector(`#step${currentStep}`);
             next.classList.add('active');
 
-            // Update navigation buttons
             document.getElementById('backBtn').style.display = currentStep > 1 ? 'block' : 'none';
             document.getElementById('nextBtn').style.display = currentStep < 5 ? 'block' : 'none';
 
-            // If we're on summary step, show selections
             if (currentStep === 5) {
                 showSummary();
             }

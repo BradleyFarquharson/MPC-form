@@ -33,19 +33,6 @@ body {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: normal;
-}
-
-h3 {
-    font-size: 22px;
-    margin: 20px 0 10px;
-    font-weight: normal;
-}
-
-/* Button Styles */
 button {
     background: #FF6B2B;
     color: white;
@@ -62,16 +49,10 @@ button:hover {
     background: #E15C28;
 }
 
-button.selected {
-    background: #FFD1B3;
-}
-
-/* Hidden Elements */
 .hidden {
     display: none;
 }
 
-/* Input and Select Styles */
 input, select {
     background: #FFF;
     color: #000;
@@ -84,10 +65,9 @@ input, select {
 }
 
 select[multiple] {
-    height: 120px;
+    height: 100px;
 }
 
-/* Navigation Styles */
 .navigation {
     display: flex;
     justify-content: center;
@@ -95,18 +75,6 @@ select[multiple] {
     margin-top: 20px;
 }
 
-.navigation button {
-    background: white;
-    color: black;
-    border: 1px solid #CCC;
-}
-
-.navigation button:hover {
-    background: #FF6B2B;
-    color: white;
-}
-
-/* Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;

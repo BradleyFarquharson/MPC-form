@@ -31,18 +31,6 @@ body {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: normal;
-}
-
-h3 {
-    font-size: 22px;
-    margin: 20px 0 10px;
-    font-weight: normal;
-}
-
 button {
     background: #FF6B2B;
     color: white;
@@ -51,10 +39,7 @@ button {
     margin: 10px 0;
     border-radius: 4px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    width: 100%;
     font-size: 16px;
-    text-align: center;
     transition: all 0.3s ease;
 }
 

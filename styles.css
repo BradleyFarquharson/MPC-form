@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     background: #2D2D2D;
     color: white;
@@ -22,6 +23,7 @@ body {
     justify-content: center;
 }
 
+/* Step Styles */
 .step {
     display: none;
 }
@@ -31,6 +33,19 @@ body {
     animation: fadeIn 0.3s ease-in-out;
 }
 
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 22px;
+    margin: 20px 0 10px;
+    font-weight: normal;
+}
+
+/* Button Styles */
 button {
     background: #FF6B2B;
     color: white;
@@ -51,10 +66,12 @@ button.selected {
     background: #FFD1B3;
 }
 
+/* Hidden Elements */
 .hidden {
     display: none;
 }
 
+/* Input and Select Styles */
 input, select {
     background: #FFF;
     color: #000;
@@ -70,6 +87,7 @@ select[multiple] {
     height: 120px;
 }
 
+/* Navigation Styles */
 .navigation {
     display: flex;
     justify-content: center;
@@ -88,6 +106,7 @@ select[multiple] {
     color: white;
 }
 
+/* Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;

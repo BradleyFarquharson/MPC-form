@@ -8,19 +8,18 @@ body {
     min-height: 100vh;
 }
 .container {
-    width: 100%;
+    width: 95%;
     max-width: 700px;
-    height: auto;
-    padding: 20px;
     background-color: #424242;
     color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
+    padding: 20px;
 }
 .section {
-    display: none;
     margin: 20px 0;
+    display: none;
 }
 .section.active {
     display: block;
@@ -35,6 +34,7 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    display: inline-block;
 }
 .btn:hover {
     background-color: #c27414;

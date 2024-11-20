@@ -3,136 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuration Flow</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Config Flow</title>
+    <style>
+        body {
+            background: #2D2D2D;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        .step-counter {
+            margin-bottom: 20px;
+        }
+        button {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        button.selected {
+            border: 2px solid #0066FF;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+        .navigation button {
+            background: #FF6B2B;
+            color: white;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Enterprise Type Step -->
-        <div class="step" id="step1">
+        <div class="step active" id="step1">
             <div class="step-counter">Step 1 of 5</div>
             <h2>Enterprise Type</h2>
-            <div class="options">
-                <button class="option-btn" data-value="single">Single Enterprise</button>
-                <button class="option-btn" data-value="multi">Multi-Tenant Enterprise</button>
-            </div>
-
-            <div class="enterprise-details hidden">
-                <h2>Enterprise Details</h2>
-                <input type="text" class="text-input" placeholder="Enterprise Name">
-                <input type="number" class="text-input hidden" placeholder="Number of Child Portals" min="2">
-            </div>
+            <button onclick="select(this, 'enterprise', 'single')">Single Enterprise</button>
+            <button onclick="select(this, 'enterprise', 'multi')">Multi-Tenant Enterprise</button>
         </div>
 
-        <!-- Network Step -->
-        <div class="step hidden" id="step2">
+        <div class="step" id="step2">
+            <div class="step-counter">Step 2 of 5</div>
             <h2>Network Configuration</h2>
-            <div class="options">
-                <button class="option-btn" data-value="earth">Earth Connect</button>
-                <button class="option-btn" data-value="local">Local Connect</button>
-            </div>
-
-            <div class="realm-config">
-                <h2>Realm Configuration</h2>
-                <div class="options">
-                    <button class="option-btn" data-value="shared">Shared Realm</button>
-                    <button class="option-btn" data-value="custom">Custom Realm</button>
-                </div>
-                <input type="text" class="text-input hidden" placeholder="Enter Realm Name">
-            </div>
+            <button onclick="select(this, 'network', 'earth')">Earth Connect</button>
+            <button onclick="select(this, 'network', 'local')">Local Connect</button>
         </div>
 
-        <!-- Earth Connect Configuration -->
-        <div class="step hidden" id="step3-earth">
-            <h2>Earth Connect Configuration</h2>
-            <div class="section">
-                <h3>Form Factor</h3>
-                <div class="options">
-                    <button class="option-btn" data-value="esim">E-SIM</button>
-                    <button class="option-btn" data-value="physical">Physical SIM</button>
-                    <button class="option-btn" data-value="chip">Chip-SIM</button>
-                    <button class="option-btn" data-value="isim">I-SIM</button>
-                </div>
-            </div>
-
-            <div class="section imsi-section hidden">
-                <h3>IMSI Type</h3>
-                <div class="options">
-                    <button class="option-btn" data-value="single">Single IMSI</button>
-                    <button class="option-btn" data-value="multi">Multi-IMSI</button>
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>Profile Plan</h3>
-                <select class="select-input">
-                    <option value="" disabled selected>Select Profile Plan</option>
-                </select>
-            </div>
-
-            <div class="section">
-                <h3>Country Selection</h3>
-                <select class="select-input" multiple>
-                    <option value="usa">USA</option>
-                    <option value="uk">UK</option>
-                    <option value="germany">Germany</option>
-                    <option value="france">France</option>
-                    <option value="japan">Japan</option>
-                    <option value="china">China</option>
-                    <option value="india">India</option>
-                    <option value="australia">Australia</option>
-                    <option value="southafrica">South Africa</option>
-                </select>
-            </div>
+        <div class="step" id="step3">
+            <div class="step-counter">Step 3 of 5</div>
+            <h2>Form Factor</h2>
+            <button onclick="select(this, 'form', 'esim')">E-SIM</button>
+            <button onclick="select(this, 'form', 'physical')">Physical SIM</button>
+            <button onclick="select(this, 'form', 'chip')">Chip-SIM</button>
+            <button onclick="select(this, 'form', 'isim')">I-SIM</button>
         </div>
 
-        <!-- Local Connect Configuration -->
-        <div class="step hidden" id="step3-local">
-            <h2>Local Connect Configuration</h2>
-            <div class="section">
-                <h3>Form Factor</h3>
-                <div class="options">
-                    <button class="option-btn" data-value="physical">Physical SIM</button>
-                    <button class="option-btn" data-value="chip">Chip-SIM</button>
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>Network Selection</h3>
-                <div class="options">
-                    <button class="option-btn" data-value="mtn">MTN Connect</button>
-                    <button class="option-btn" data-value="vodacom">Vodacom Connect</button>
-                    <button class="option-btn" data-value="telkom">Telkom Connect</button>
-                    <button class="option-btn" data-value="ee">EE Connect</button>
-                    <button class="option-btn" data-value="att">ATT Connect</button>
-                    <button class="option-btn" data-value="vodafone">Vodafone Connect</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Billing Plan -->
-        <div class="step hidden" id="step4">
+        <div class="step" id="step4">
+            <div class="step-counter">Step 4 of 5</div>
             <h2>Billing Plan</h2>
-            <div class="options">
-                <button class="option-btn" data-value="multitenant">Multitenant Pooled Plan</button>
-                <button class="option-btn" data-value="portal">Portal Pooled Plan</button>
-                <button class="option-btn" data-value="user">User Pooled Data Plan</button>
-                <button class="option-btn" data-value="sim">Sim Pooled Data Plan</button>
-            </div>
+            <button onclick="select(this, 'billing', 'multitenant')">Multitenant Pooled Plan</button>
+            <button onclick="select(this, 'billing', 'portal')">Portal Pooled Plan</button>
+            <button onclick="select(this, 'billing', 'user')">User Pooled Data Plan</button>
+            <button onclick="select(this, 'billing', 'sim')">Sim Pooled Data Plan</button>
         </div>
 
-        <!-- Summary -->
-        <div class="step hidden" id="step5">
-            <h2>Configuration Summary</h2>
+        <div class="step" id="step5">
+            <div class="step-counter">Step 5 of 5</div>
+            <h2>Summary</h2>
             <div id="summary"></div>
         </div>
 
-        <!-- Navigation -->
         <div class="navigation">
-            <button id="backBtn" class="nav-btn">Back</button>
-            <button id="nextBtn" class="nav-btn">Next</button>
+            <button onclick="navigate('back')" id="backBtn" style="display:none">Back</button>
+            <button onclick="navigate('next')" id="nextBtn">Next</button>
         </div>
     </div>
-    <script src="app.js"></script>
+
+    <script>
+        let currentStep = 1;
+        const selections = {};
+
+        function select(btn, type, value) {
+            // Remove selected class from siblings
+            btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+            // Add selected class to clicked button
+            btn.classList.add('selected');
+            // Store selection
+            selections[type] = value;
+        }
+
+        function navigate(direction) {
+            const current = document.querySelector(`#step${currentStep}`);
+            current.classList.remove('active');
+            
+            if (direction === 'next' && currentStep < 5) {
+                currentStep++;
+            } else if (direction === 'back' && currentStep > 1) {
+                currentStep--;
+            }
+
+            const next = document.querySelector(`#step${currentStep}`);
+            next.classList.add('active');
+
+            // Update navigation buttons
+            document.getElementById('backBtn').style.display = currentStep > 1 ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = currentStep < 5 ? 'block' : 'none';
+
+            // If we're on summary step, show selections
+            if (currentStep === 5) {
+                showSummary();
+            }
+        }
+
+        function showSummary() {
+            let html = '';
+            for (let [key, value] of Object.entries(selections)) {
+                html += `<p><strong>${key}:</strong> ${value}</p>`;
+            }
+            document.getElementById('summary').innerHTML = html;
+        }
+    </script>
 </body>
 </html>

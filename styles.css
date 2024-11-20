@@ -19,8 +19,8 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content */
-    height: auto; /* Adjust based on content */
+    justify-content: center;
+    height: auto;
 }
 
 .step {
@@ -31,11 +31,6 @@ body {
     display: block;
 }
 
-.step-counter {
-    margin-bottom: 20px;
-    font-size: 18px;
-}
-
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
@@ -43,9 +38,9 @@ h2 {
 }
 
 button {
-    background: white;
-    color: black;
-    border: 1px solid #CCC;
+    background: #FF6B2B;
+    color: white;
+    border: none;
     padding: 12px 24px;
     margin: 10px 0;
     border-radius: 4px;
@@ -57,14 +52,8 @@ button {
     transition: all 0.3s ease;
 }
 
-button:focus {
-    outline: none;
-    border: 1px solid #FFF;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
-}
-
-.selected {
-    background: #EEE;
+button.selected {
+    background: #FFD1B3;
 }
 
 .navigation {
@@ -78,10 +67,6 @@ button:focus {
     background: white;
     color: black;
     border: 1px solid #CCC;
-    border-radius: 4px;
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: background 0.3s ease;
 }
 
 .navigation button:hover {

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div id="initial" class="section active">
+        <div class="question">Do you want to manage a single enterprise, or multiple enterprises?</div>
+        <button class="btn" onclick="showSection('single')">Single Enterprise</button>
+        <button class="btn" onclick="showSection('multiple')">Multiple Enterprises</button>
+    </div>
+
+    <div id="multiple" class="section">
+        <div class="question">How many child-portals/enterprises do you need to manage?</div>
+        <input type="number" id="enterpriseCount" min="2" value="2" style="padding: 10px; margin: 10px 0;">
+        <br>
+        <button class="btn" onclick="showSection('connectivity')">Continue</button>
+        <button class="btn back-btn" onclick="showSection('initial')">Back</button>
+    </div>
+
+    <div id="single" class="section">
+        <div class="question">Single enterprise selected</div>
+        <button class="btn" onclick="showSection('connectivity')">Continue</button>
+        <button class="btn back-btn" onclick="showSection('initial')">Back</button>
+    </div>
+
+    <div id="connectivity" class="section">
+        <div class="question">Do you want Earth Connect or Local Connect?</div>
+        <button class="btn" onclick="showEarthConnectOptions()">Earth Connect</button>
+        <button class="btn" onclick="showLocalConnectOptions()">Local Connect</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <div id="earth-connect-options" class="section">
+        <div class="question">Select a service:</div>
+        <button class="btn" onclick="showFormFactor('flexiSIM')">FlexiSIM</button>
+        <button class="btn" onclick="showFormFactor()">StarLink</button>
+        <button class="btn" onclick="showFormFactor()">Private</button>
+        <button class="btn back-btn" onclick="showSection('connectivity')">Back</button>
+    </div>
+
+    <div id="local-connect-options" class="section">
+        <div class="question">Select a local SIM option:</div>
+        <button class="btn" onclick="showFormFactor()">MTN SIM</button>
+        <button class="btn" onclick="showFormFactor()">Vodacom SIM</button>
+        <button class="btn" onclick="showFormFactor()">Telecom SIM</button>
+        <button class="btn" onclick="showFormFactor()">EE SIM</button>
+        <button class="btn" onclick="showFormFactor()">ATT SIM</button>
+        <button class="btn" onclick="showFormFactor()">Vodafone Roaming SIM</button>
+        <button class="btn" onclick="showFormFactor()">Telecom Roaming SIM</button>
+        <button class="btn back-btn" onclick="showSection('connectivity')">Back</button>
+    </div>
+
+    <div id="form-factor" class="section">
+        <div class="question">What form factor card do you want?</div>
+        <button class="btn" onclick="selectESIM()">E-SIM</button>
+        <button class="btn" onclick="showIMSIOptions()">Physical SIM</button>
+        <button class="btn" onclick="showIMSIOptions()">Chip-SIM</button>
+        <button class="btn" onclick="showIMSIOptions()">I-SIM</button>
+        <button class="btn back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <div id="imsi-option" class="section">
+        <div class="question">Do you want Single IMSI or Multi-IMSI?</div>
+        <button class="btn" onclick="showSwitchPlanOptions()">Single IMSI</button>
+        <button class="btn" onclick="showSwitchPlanOptions()">Multi-IMSI</button>
+        <button class="btn back-btn" onclick="showFormFactor()">Back</button>
+    </div>
+
+    <div id="switch-plan-option" class="section">
+        <div class="question">Would you like Switch Plan 23, 71 or 60, 27 or would you like a custom plan?</div>
+        <button class="btn" onclick="showPlanSelection()">Switch Plan 23, 71</button>
+        <button class="btn" onclick="showPlanSelection()">Switch Plan 60, 27</button>
+        <button class="btn" onclick="showCountrySelection()">Custom Plan</button>
+        <button class="btn back-btn" onclick="showIMSIOptions()">Back</button>
+    </div>
+
+    <div id="country-selection" class="section">
+        <div class="question">Select the countries and regions:</div>
+        <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox"> USA</label><br>
+            <label class="checkbox-item"><input type="checkbox"> Canada</label><br>
+            <label class="checkbox-item"><input type="checkbox"> UK</label><br>
+            <label class="checkbox-item"><input type="checkbox"> Germany</label><br>
+            <label class="checkbox-item"><input type="checkbox"> France</label><br>
+            <label class="checkbox-item"><input type="checkbox"> Asia-Pacific</label><br>
+            <label class="checkbox-item"><input type="checkbox"> South America</label><br>
+            <label class="checkbox-item"><input type="checkbox"> Australia</label><br>
+            <label class="checkbox-item"><input type="checkbox"> Japan</label><br>
+            <label class="checkbox-item"><input type="checkbox"> China</label><br>
+            <label class="checkbox-item"><input type="checkbox"> India</label><br>
+            <label class="checkbox-item"><input type="checkbox"> South Africa</label>
+        </div>
+        <button class="btn" onclick="showPlanSelection()">Submit</button>
+        <button class="btn back-btn" onclick="showSwitchPlanOptions()">Back</button>
+    </div>
+
+    <div id="plan-selection" class="section">
+        <div class="tab" onclick="showSpecificPlan('country')">Country Plan</div>
+        <div class="tab" onclick="showSpecificPlan('region')">Region Plan</div>
+        <div class="tab" onclick="showSpecificPlan('network')">Network Plan</div>
+        <div class="tab" onclick="showSpecificPlan('pooled')">Pooled Plan</div>
+
+        <div id="country-plan" class="section" style="display:none;">
+            <button class="btn" onclick="finalMessage('Country Plan Selected')">Select Country Plan</button>
+        </div>
+
+        <div id="region-plan" class="section" style="display:none;">
+            <button class="btn" onclick="finalMessage('Region Plan Selected')">Select Region Plan</button>
+        </div>
+
+        <div id="network-plan" class="section" style="display:none;">
+            <button class="btn" onclick="finalMessage('Network Plan Selected')">Select Network Plan</button>
+        </div>
+
+        <div id="pooled-plan" class="section" style="display:none;">
+            <button class="btn" onclick="showPooledOptions()">SIM Pooled Plan</button>
+            <button class="btn" onclick="showPooledOptions()">Portal Pooled Plan</button>
+        </div>
+
+        <button class="btn back-btn" onclick="showCountrySelection()">Back</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

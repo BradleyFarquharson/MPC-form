@@ -23,7 +23,6 @@ function goBack() {
     }
 }
 
-// Function to show plan content based on selected tab
 function showPlanContent(planId) {
     // Remove active class from all tabs
     document.querySelectorAll('.tab').forEach(tab => {
@@ -44,11 +43,11 @@ function showPlanContent(planId) {
 
 function finalMessage(message) {
     alert(`You have completed the selection: ${message}`);
-    // Optionally, you can reset the flow or navigate to the initial section
+    // Optionally, reset to initial state
+    // history = ['initial'];
     // showSection('initial');
 }
 
-// Generate Dynamic Switch Plans
 function generateSwitchPlans() {
     const plansContainer = document.getElementById('dynamic-plans');
     const plans = [];

@@ -7,17 +7,16 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 20px;
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.05);
+    background: #3D3D3D;
     border-radius: 12px;
+    width: 500px;
     padding: 30px;
-    min-width: 400px;
-    max-width: 800px;
-    margin: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .step {
@@ -26,30 +25,31 @@ body {
 
 .step.active {
     display: block;
-    animation: fadeIn 0.3s ease;
+}
+
+.step-counter {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: normal;
 }
 
 button {
     background: white;
     border: none;
     padding: 10px 20px;
-    margin: 5px;
+    margin: 5px 0;
     border-radius: 4px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    width: calc(100% - 10px); /* Full width minus margins */
+    width: 100%;
     text-align: left;
     font-size: 16px;
-}
-
-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-button.selected {
-    background: #f0f0f0;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
 }
 
 .navigation {
@@ -63,29 +63,4 @@ button.selected {
     color: white;
     width: auto;
     text-align: center;
-    padding: 12px 30px;
-    border-radius: 8px;
-}
-
-h2 {
-    margin-bottom: 25px;
-    font-size: 24px;
-    font-weight: normal;
-}
-
-.step-counter {
-    margin-bottom: 20px;
-    font-size: 16px;
-    opacity: 0.8;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }

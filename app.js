@@ -2,30 +2,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 0;
     const steps = document.querySelectorAll('.step');
     const selections = {
-        enterprise: {},
-        network: {},
-        connectivity: {},
-        billing: {},
+        enterprise: { type: null },
+        network: { type: null, realm: null },
+        connectivity: { type: null, formFactor: null, imsiType: null, countries: [] },
+        billing: { rateCard: null, plan: null },
     };
 
     steps[currentStep].classList.add('active');
     updateNavigation();
 
-    // Enterprise Configuration
     document.querySelectorAll('[data-action="selectEnterprise"]').forEach(button => {
         button.addEventListener('click', () => {
             const type = button.dataset.type;
             selections.enterprise.type = type;
             document.getElementById('enterpriseInputs').classList.remove('hidden');
+            const childPortals = document.getElementById('childPortals');
             if (type === 'multi') {
-                document.getElementById('childPortals').classList.remove('hidden');
+                childPortals.classList.remove('hidden');
             } else {
-                document.getElementById('childPortals').classList.add('hidden');
+                childPortals.classList.add('hidden');
             }
         });
     });
 
-    // Network Configuration
     document.querySelectorAll('[data-action="selectNetwork"]').forEach(button => {
         button.addEventListener('click', () => {
             const type = button.dataset.type;
@@ -38,15 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const type = button.dataset.type;
             selections.network.realm = type;
+            const realmName = document.getElementById('realmName');
             if (type === 'custom') {
-                document.getElementById('realmName').classList.remove('hidden');
+                realmName.classList.remove('hidden');
             } else {
-                document.getElementById('realmName').classList.add('hidden');
+                realmName.classList.add('hidden');
             }
         });
     });
 
-    // Connectivity Options
     document.querySelectorAll('[data-action="chooseOption"]').forEach(button => {
         button.addEventListener('click', () => {
             selections.connectivity.type = button.dataset.option;
@@ -58,10 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const factor = button.dataset.factor;
             selections.connectivity.formFactor = factor;
+            const imsiOptions = document.getElementById('imsiOptions');
             if (factor !== 'esim') {
-                document.getElementById('imsiOptions').classList.remove('hidden');
+                imsiOptions.classList.remove('hidden');
             } else {
-                navigate('next'); // E-SIM goes directly to the next step
+                navigate('next');
             }
         });
     });
@@ -108,13 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function navigate(direction) {
         steps[currentStep].classList.remove('active');
-        
         if (direction === 'next' && currentStep < steps.length - 1) {
             currentStep++;
         } else if (direction === 'back' && currentStep > 0) {
             currentStep--;
         }
-
         steps[currentStep].classList.add('active');
         updateNavigation();
     }
@@ -122,24 +120,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateNavigation() {
         document.getElementById('backBtn').style.display = currentStep > 0 ? 'block' : 'none';
         document.getElementById('nextBtn').style.display = currentStep < steps.length - 1 ? 'block' : 'none';
-
-        if (currentStep === steps.length - 1) {
-            showSummary();
-        }
+        if (currentStep === steps.length - 1) showSummary();
     }
 
     function showSummary() {
-        let html = `
-            <p><strong>Enterprise:</strong> ${selections.enterprise.type}</p>
-            <p><strong>Network:</strong> ${selections.network.type}</p>
-            <p><strong>Connectivity:</strong> ${selections.connectivity.type}</p>
-            <p><strong>Form Factor:</strong> ${selections.connectivity.formFactor}</p>
-            <p><strong>IMSI Type:</strong> ${selections.connectivity.imsiType}</p>
-            <p><strong>Connectivity Plan:</strong> ${selections.connectivity.plan}</p>
-            <p><strong>Countries:</strong> ${selections.connectivity.countries.join(', ')}</p>
-            <p><strong>Rate Card:</strong> ${selections.billing.rateCard}</p>
-            <p><strong>Billing Plan:</strong> ${selections.billing.plan}</p>
+        const summaryContent = `
+            <p><strong>Enterprise:</strong> ${selections.enterprise.type || 'N/A'}</p>
+            <p><strong>Network:</strong> ${selections.network.type || 'N/A'}</p>
+            <p><strong>Realm:</strong> ${selections.network.realm || 'N/A'}</p>
+            <p><strong>Connectivity:</strong> ${selections.connectivity.type || 'N/A'}</p>
+            <p><strong>Form Factor:</strong> ${selections.connectivity.formFactor || 'N/A'}</p>
+            <p><strong>IMSI Type:</strong> ${selections.connectivity.imsiType || 'N/A'}</p>
+            <p><strong>Countries:</strong> ${selections.connectivity.countries.join(', ') || 'N/A'}</p>
+            <p><strong>Rate Card:</strong> ${selections.billing.rateCard || 'N/A'}</p>
+            <p><strong>Billing Plan:</strong> ${selections.billing.plan || 'N/A'}</p>
         `;
-        document.getElementById('summaryContent').innerHTML = html;
+        document.getElementById('summaryContent').innerHTML = summaryContent;
     }
 });
